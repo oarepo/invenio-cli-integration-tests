@@ -10,22 +10,16 @@ set -e
 
 OPTS="--force-reinstall --no-cache-dir"
 
-
-echo "### venv activate:"
-. venv/bin/activate
-echo "### pip upgrade:"
-python3.9 -m pip install --upgrade pip
-echo "### install invenio-cli:"
-pip install $OPTS invenio-cli
 echo "### invenio-cli init:"
 invenio-cli init rdm -c v11.0 --no-input
 
 echo "### ls -l my-site:"
 ls -l my-site
-
 cd my-site
+
 echo "### invenio-cli install:"
 invenio-cli install
+
 echo "### invenio-cli services setup:"
 invenio-cli services setup
 

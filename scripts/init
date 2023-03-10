@@ -8,6 +8,21 @@
 
 set -e
 
-#apt-get install --no-install-recommends --no-install-suggests -y build-essential libcairo2-dev nodejs python3-venv docker docker-compose jq
+OPTS="--force-reinstall --no-cache-dir"
 
-python3.9 -m venv venv
+echo "### venv setup for python ver.${PYTHON_VERSION}:"
+python${PYTHON_VERSION} -m venv venv
+
+echo "### venv activate:"
+. venv/bin/activate
+
+echo "### pip upgrade:"
+python3.9 -m pip install --upgrade pip
+
+echo "### install invenio-cli:"
+pip install $OPTS invenio-cli
+
+echo "### nodesource_setup_14.sh:"
+curl https://deb.nodesource.com/setup_14.x -o nodesource_setup_14.sh
+chmod u+x nodesource_setup_14.sh
+./nodesource_setup_14.sh

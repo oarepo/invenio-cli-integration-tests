@@ -36,6 +36,7 @@ jobs:
       REQUIREMENTS: ${{ matrix.requirements }}
       SEARCH: ${{ matrix.search-service }}
       DB: ${{ matrix.db-service }}
+      PYTHON_VERSION: ${{ matrix.python-version }}
 #      TOK: '${{ secrets.INTEGRATION_TEST }}'
       SQLALCHEMY_DATABASE_URI: 'postgresql+psycopg2://invenio:invenio@localhost:5432/invenio'
       POSTGRES_USER: postgres
