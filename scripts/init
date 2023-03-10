@@ -8,6 +8,11 @@
 
 set -e
 
-apt-get install --no-install-recommends --no-install-suggests -y build-essential libcairo2-dev nodejs python3-venv docker docker-compose jq
+#apt-get install --no-install-recommends --no-install-suggests -y build-essential libcairo2-dev nodejs python3-venv docker docker-compose jq
+
+id
+type jq
+type docker
+type docker-compose
 
 python3.9 -m venv venv
