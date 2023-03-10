@@ -21,8 +21,3 @@ python3.9 -m pip install --upgrade pip
 
 echo "### install invenio-cli:"
 pip install $OPTS invenio-cli
-
-echo "### nodesource_setup_14.sh:"
-curl https://deb.nodesource.com/setup_14.x -o nodesource_setup_14.sh
-chmod u+x nodesource_setup_14.sh
-./nodesource_setup_14.sh
