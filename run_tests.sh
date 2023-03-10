@@ -10,8 +10,6 @@ set -e
 
 echo -e "\ninvenio-cli-integration-tests/run_tests.sh"
 
-echo "Disabled"; exit 0
-
 #function cleanup(){
 #  eval "$(docker-services-cli down --env)"
 #}
@@ -35,6 +33,8 @@ invenio shell --simple-prompt -c "from invenio_config import version; print (\"i
 #curl -sX GET "http://127.0.0.1:9200" || cat /tmp/local-es.log
 echo "invenio index check:"
 invenio index check
+
+echo "Remaining part disabled"; exit 0
 
 # invenio run:
 echo -e "\ninvenio run (testing REST):"
