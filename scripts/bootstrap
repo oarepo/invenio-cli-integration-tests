@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2023 CESNET.
+#
+# invenio-cli-integration-tests is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+set -e
+
+OPTS="--force-reinstall --no-cache-dir"
+
+. venv/bin/activate
+python3.9 -m pip install --upgrade pip
+pip install $OPTS invenio-cli
+invenio-cli init rdm -c v11.0 --no-input
+
+#cd my-site
+ls -l my-site
+#invenio-cli install
+#invenio-cli services setup
+
+#pip install $OPTS -r .requirements.txt
+#pip freeze

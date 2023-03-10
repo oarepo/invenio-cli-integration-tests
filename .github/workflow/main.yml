@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2023 CESNET.
+#
+# invenio-cli-integration-tests is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+name: Tests and reqs builder
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore: [ 'upload/*', '.github/workflows/p2oarepo.yml' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+#        requirements: [ rdm-11, rdm-11-test]
+        requirements: [ rdm-11 ]
+        python-version: [ 3.9 ]
+        db-service: [ postgresql13 ]
+        search-service: [ opensearch2 ]
+        include:
+          - extras: 'opensearch2,s3'
+            requirements: 'rdm-11'
+#          - extras: 'opensearch2,s3,tests'
+#            requirements: 'rdm-11-test'
+    env:
+      E2E: 'no'
+      EXTRAS: ${{ matrix.extras }}
+      REQUIREMENTS: ${{ matrix.requirements }}
+      SEARCH: ${{ matrix.search-service }}
+      DB: ${{ matrix.db-service }}
+#      TOK: '${{ secrets.INTEGRATION_TEST }}'
+      SQLALCHEMY_DATABASE_URI: 'postgresql+psycopg2://invenio:invenio@localhost:5432/invenio'
+      POSTGRES_USER: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: invenio
+      GH_EVENT_NAME: ${{ github.event_name }}
+    steps:
+      - name: Checkout oarepo/invenio-cli-integration-tests
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: init
+        run: |
+          echo "EXTRAS:$EXTRAS; REQUIREMENTS:$REQUIREMENTS; SEARCH:$SEARCH; DB:$DB"
+          ./scripts/init
+      - name: install (bootstrap)
+        run: |
+          ./scripts/bootstrap
+      - name: run_test
+        env:
+          INVENIO_SQLALCHEMY_DATABASE_URI: ${{ env.SQLALCHEMY_DATABASE_URI }}
+        run: |
+          ./run_tests.sh
+#      - name: push results back
+#        run: |
+#          ./scripts/push_back.sh

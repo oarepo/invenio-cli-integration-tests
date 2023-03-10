@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2023 CESNET.
+#
+# invenio-cli-integration-tests is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+set -e
+
+apt-get install --no-install-recommends --no-install-suggests -y build-essential libcairo2-dev nodejs python3-venv docker docker-compose jq
+
+python3.9 -m venv venv

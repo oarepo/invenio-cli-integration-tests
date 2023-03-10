@@ -1,0 +1,44 @@
+{
+  "access": {
+    "files": "public",
+    "record": "public"
+  },
+  "files": {
+    "enabled": false
+  },
+  "metadata": {
+    "creators": [{
+        "affiliations": [],
+        "person_or_org": {
+          "family_name": "Author",
+          "given_name": "Second",
+          "identifiers": [],
+          "type": "personal"
+        }
+      }
+    ],
+    "description": "<p>Description 2.</p>",
+    "identifiers": [],
+    "publication_date": "2023-01-02",
+    "publisher": "Publisher",
+    "resource_type": {
+      "id": "publication-preprint"
+    },
+    "rights": [{
+        "id": "cc-by-4.0"
+      },
+      {
+        "title": {
+          "en": "Copyright (C) 2023 CESNET z.s.p.o."
+        }
+      }
+    ],
+    "subjects": [{
+        "subject": "Digital Libraries"
+      }
+    ],
+    "title": "Title test Record 2",
+    "version": "v1"
+  },
+  "pids": {}
+}
