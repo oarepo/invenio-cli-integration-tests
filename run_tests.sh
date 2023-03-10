@@ -25,8 +25,10 @@ echo -e "\ninvenio-cli-integration-tests/run_tests.sh"
 #echo ""
 
 echo "### venv activate:"
-. ~/venv/bin/activate
-cd ~/my-site
+. venv/bin/activate
+ls -l my-site
+cd my-site
+pwd
 
 # test invenio shell:
 echo -e "\n### invenio shell, invenio_config's version.__version__):"
