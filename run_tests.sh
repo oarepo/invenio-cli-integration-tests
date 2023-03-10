@@ -41,24 +41,25 @@ echo -e "\n### invenio index check:"
 invenio index check
 
 # invenio run:
-echo -e "\ninvenio-cli run:"
+echo -e "\n### invenio-cli run:"
 invenio-cli run > invenio_run.log 2>&1 &
 INVEPID=$!
-trap "kill $INVEPID &>/dev/null; cat invenio_run.log" EXIT
+trap "kill $INVEPID &>/dev/null; echo '---invenio_run.log:'; cat invenio_run.log; echo '---'" EXIT
 sleep 8
 
 # test HTTP UI:
-echo -e "\ntesting HTTP UI:"
-curl -sk -XGET "https://127.0.0.1:5000/" | grep "You've successfully installed InvenioRDM"
+echo -e "\n### testing HTTP UI:"
+UI_URL="https://127.0.0.1:5000/"
+curl -sk -XGET "$UI_URL" | tee ui.html | grep "You've successfully installed InvenioRDM" || { echo -e "\n---ui.html:"; cat ui.html; echo "---"; }
 
 # test REST API:
-echo -e "\ntesting REST API:"
+echo -e "\n### testing REST API:"
 echo -n "jq version:"; jq --version
 ../scripts/test_rest.sh
 
 kill $INVEPID
 trap - EXIT
-echo -e "\ninvenio_run.log:"
+echo -e "\n### invenio_run.log:"
 cat invenio_run.log
 
 #echo -e "\nsave requirements"
