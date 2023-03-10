@@ -24,17 +24,21 @@ echo -e "\ninvenio-cli-integration-tests/run_tests.sh"
 #diff <(echo "$ENV0") <(echo "$ENV1") || true
 #echo ""
 
+echo "### venv activate:"
+. ~/venv/bin/activate
+cd ~/my-site
+
 # test invenio shell:
-echo -e "\ninvenio shell, invenio_config's version.__version__):"
+echo -e "\n### invenio shell, invenio_config's version.__version__):"
 invenio shell --simple-prompt -c "from invenio_config import version; print (\"invenio_config version:\", version.__version__)"
 
 # invenio index:
 #echo -e "\nsearch-service GET:"
 #curl -sX GET "http://127.0.0.1:9200" || cat /tmp/local-es.log
-echo "invenio index check:"
+echo -e \n"### invenio index check:"
 invenio index check
 
-echo "Remaining part disabled"; exit 0
+echo -e "\nRemaining part disabled"; exit 0
 
 # invenio run:
 echo -e "\ninvenio run (testing REST):"
