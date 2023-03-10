@@ -40,11 +40,11 @@ jobs:
       PYTHON_VERSION: ${{ matrix.python-version }}
       NODE_VERSION: ${{ matrix.node-version }}
 #      TOK: '${{ secrets.INTEGRATION_TEST }}'
-      SQLALCHEMY_DATABASE_URI: 'postgresql+psycopg2://invenio:invenio@localhost:5432/invenio'
-      POSTGRES_USER: postgres
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: invenio
+#      SQLALCHEMY_DATABASE_URI: 'postgresql+psycopg2://invenio:invenio@localhost:5432/invenio'
+#      POSTGRES_USER: postgres
+#      POSTGRES_HOST: localhost
+#      POSTGRES_PORT: 5432
+#      POSTGRES_DB: invenio
       GH_EVENT_NAME: ${{ github.event_name }}
     steps:
       - name: Checkout oarepo/invenio-cli-integration-tests
