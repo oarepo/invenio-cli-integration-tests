@@ -37,26 +37,24 @@ invenio shell --simple-prompt -c "from invenio_config import version; print (\"i
 # invenio index:
 #echo -e "\nsearch-service GET:"
 #curl -sX GET "http://127.0.0.1:9200" || cat /tmp/local-es.log
-echo -e \n"### invenio index check:"
+echo -e "\n### invenio index check:"
 invenio index check
 
-echo -e "\nRemaining part disabled"; exit 0
-
 # invenio run:
-echo -e "\ninvenio run (testing REST):"
-#export INVENIO_RECORDS_REST_DEFAULT_CREATE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
-#export INVENIO_RECORDS_REST_DEFAULT_UPDATE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
-#export INVENIO_RECORDS_REST_DEFAULT_DELETE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
-
-#invenio run --cert ./ssl/test.crt --key ./ssl/test.key > invenio_run.log 2>&1 &
+echo -e "\ninvenio-cli run:"
 invenio-cli run > invenio_run.log 2>&1 &
 INVEPID=$!
 trap "kill $INVEPID &>/dev/null; cat invenio_run.log" EXIT
 sleep 8
 
+# test HTTP UI:
+echo -e "\ntesting HTTP UI:"
+curl -sk -XGET "https://127.0.0.1:5000/" | grep "You've successfully installed InvenioRDM"
+
 # test REST API:
+echo -e "\ntesting REST API:"
 echo -n "jq version:"; jq --version
-./scripts/test_rest.sh
+../scripts/test_rest.sh
 
 kill $INVEPID
 trap - EXIT
@@ -69,4 +67,5 @@ cat invenio_run.log
 ##./scripts/poetry2reqs.py | sed 's/\x0D$//' | grep -v '^pywin32==' > $REQFILE
 #grep -F -e invenio= -e invenio-base -e invenio-search -e invenio-db $REQFILE
 
+#echo -e "\nRemaining part disabled"; exit 0
 echo "Done."

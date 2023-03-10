@@ -20,6 +20,16 @@ echo -e "\n### ls -l my-site:"
 ls -l my-site
 cd my-site
 
+echo -e "\n### patch invenio.cfg:"
+cat <<EOT >> invenio.cfg
+
+# added for tests:
+CSRF_METHODS = []
+RECORDS_REST_DEFAULT_CREATE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
+RECORDS_REST_DEFAULT_UPDATE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
+RECORDS_REST_DEFAULT_DELETE_PERMISSION_FACTORY='invenio_records_rest.utils:allow_all'
+EOT
+
 echo -e "\n### invenio-cli install:"
 invenio-cli install
 

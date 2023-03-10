@@ -10,14 +10,15 @@ set -e
 
 OPTS="--force-reinstall --no-cache-dir"
 
-echo "### venv setup for python ver.${PYTHON_VERSION}:"
+echo -e "\n### venv setup for python ver.${PYTHON_VERSION}:"
 python${PYTHON_VERSION} -m venv venv
 
-echo "### venv activate:"
+echo -e "\n### venv activate:"
 . venv/bin/activate
+python --version
 
-echo "### pip upgrade:"
-python3.9 -m pip install --upgrade pip
+echo -e "\n### pip upgrade:"
+python -m pip install --upgrade pip
 
-echo "### install invenio-cli:"
+echo -e "\n### install invenio-cli:"
 pip install $OPTS invenio-cli
