@@ -56,6 +56,9 @@ curl -sk -XGET "$UI_URL" | tee ui.html | grep "You've successfully installed Inv
 echo -en "\n### jq version:"; jq --version
 echo -e "\n===DBG:"
 TOKTXT=$(date '+%y%m%d-%H%M%S')
+echo "invenio users create noreply@cesnet.cz --password 123456"
+invenio users create noreply@cesnet.cz --password 123456
+echo $?
 echo "invenio tokens create -u noreply@cesnet.cz -n \"test-$TOKTXT\""
 invenio tokens create -u noreply@cesnet.cz -n "test-$TOKTXT"
 echo $?
