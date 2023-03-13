@@ -21,4 +21,5 @@ echo -e "\n### pip upgrade:"
 python -m pip install --upgrade pip
 
 echo -e "\n### install invenio-cli:"
-pip install $OPTS invenio-cli
+#pip install $OPTS invenio-cli
+pip install $OPTS invenio-cli==1.0.18
