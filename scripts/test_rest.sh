@@ -16,7 +16,7 @@ DATE=$(date '+%y%m%d-%H%M%S')
 TESTUSER_EMAIL="noreply@cesnet.cz"
 
 echo -n "  user create: "
-invenio users create "$TESTUSER_EMAIL" --password 123456
+invenio users create "$TESTUSER_EMAIL" --password 123456 --active
 echo "  OK"
 echo -n "  token create: "
 TOKTXT=$(date '+%y%m%d-%H%M%S')
