@@ -13,10 +13,14 @@ err() { printf "$0[error]: %s\n" "$*" >&2; exit 2; }
 #REST_URL="https://${INVENIO_SERVER_NAME}/api/records"
 REST_URL="https://127.0.0.1:5000/api/records"
 DATE=$(date '+%y%m%d-%H%M%S')
+TESTUSER_EMAIL="noreply@cesnet.cz"
 
+echo -n "  user create: "
+invenio users create "$TESTUSER_EMAIL" --password 123456
+echo "  OK"
 echo -n "  token create: "
 TOKTXT=$(date '+%y%m%d-%H%M%S')
-TOK=$(invenio tokens create -u noreply@cesnet.cz -n "test-$TOKTXT")
+TOK=$(invenio tokens create -u "$TESTUSER_EMAIL" -n "test-$TOKTXT")
 echo "  OK"
 
 echo -n "  list records: "
@@ -123,5 +127,5 @@ echo "  OK"
 #sleep 1
 
 echo -n "  token delete: "
-invenio tokens delete -u noreply@cesnet.cz -n "test-$TOKTXT" --force
+invenio tokens delete -u "$TESTUSER_EMAIL" -n "test-$TOKTXT" --force
 echo "  OK Done."
