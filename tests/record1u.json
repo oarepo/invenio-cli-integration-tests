@@ -22,7 +22,7 @@
     "publication_date": "2023-01-01",
     "publisher": "Publisher",
     "resource_type": {
-      "id": "publication-preprint"
+      "id": "publication"
     },
     "rights": [{
         "id": "cc-by-4.0"
