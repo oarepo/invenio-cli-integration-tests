@@ -36,5 +36,12 @@ invenio-cli install
 echo -e "\n### invenio-cli services setup:"
 invenio-cli services setup
 
+echo -e "\n### DEBUG /records/_search:"
+curl -sX GET "http://127.0.0.1:9200/records/_search"
+echo -e "\n### DEBUG /_cat/indices:"
+curl -sX GET "http://127.0.0.1:9200/_cat/indices"
+echo -e "\n### DEBUG Done."
+
+
 #pip install $OPTS -r .requirements.txt
 #pip freeze
