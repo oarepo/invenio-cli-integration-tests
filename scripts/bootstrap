@@ -42,6 +42,8 @@ echo -e "\n### DEBUG /my-site-rdmrecords-records/_search:"
 curl -sX GET "http://127.0.0.1:9200/my-site-rdmrecords-records/_search" | jq '.'
 echo -e "\n### DEBUG /_nodes:"
 curl -sX GET "http://127.0.0.1:9200/_nodes" | jq '.'
+echo -e "\n### DEBUG pip freeze:"
+pip freeze
 echo -e "\n### DEBUG Done."
 
 
