@@ -53,8 +53,14 @@ UI_URL="https://127.0.0.1:5000/"
 curl -sk -XGET "$UI_URL" | tee ui.html | grep "You've successfully installed InvenioRDM" || { echo -e "\n---ui.html:"; cat ui.html; echo "---"; }
 
 # test REST API:
+echo -en "\n### jq version:"; jq --version
+echo -e "\n===DBG:"
+TOKTXT=$(date '+%y%m%d-%H%M%S')
+echo "invenio tokens create -u noreply@cesnet.cz -n \"test-$TOKTXT\""
+invenio tokens create -u noreply@cesnet.cz -n "test-$TOKTXT"
+echo $?
+echo "==="
 echo -e "\n### testing REST API:"
-echo -n "jq version:"; jq --version
 ../scripts/test_rest.sh
 
 kill $INVEPID
